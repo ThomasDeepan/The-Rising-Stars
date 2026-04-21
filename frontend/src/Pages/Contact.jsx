@@ -23,10 +23,7 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(
-        "http://localhost:5000/api/contact",
-        formData,
-      );
+      const res = await axios.post("/api/contact", formData);
       alert("Success! The Rising Stars team will contact you soon.");
       // Clear form after success
       setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
