@@ -131,7 +131,7 @@ const AdminDashboard = () => {
 
   const fetchInquiries = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/inquiries");
+      const res = await axios.get("/api/inquiries");
       setInquiries(res.data);
     } catch (err) {
       console.error("Inquiry Error:", err);
@@ -140,7 +140,7 @@ const AdminDashboard = () => {
 
   const fetchBlogs = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/blogs");
+      const res = await axios.get("/api/blogs");
       setBlogs(res.data);
     } catch (err) {
       console.error("Blog Error:", err);
@@ -149,14 +149,14 @@ const AdminDashboard = () => {
 
   const deleteInquiry = async (id) => {
     if (window.confirm("Delete this inquiry?")) {
-      await axios.delete(`http://localhost:5000/api/inquiries/${id}`);
+      await axios.delete(`/api/inquiries/${id}`);
       fetchInquiries();
     }
   };
 
   const deleteBlog = async (id) => {
     if (window.confirm("Delete this blog post?")) {
-      await axios.delete(`http://localhost:5000/api/blogs/${id}`);
+      await axios.delete(`/api/blogs/${id}`);
       fetchBlogs();
     }
   };
@@ -169,7 +169,7 @@ const AdminDashboard = () => {
       if (fileId) finalUrl = `https://lh3.googleusercontent.com/d/${fileId}`;
     }
     try {
-      await axios.post("http://localhost:5000/api/gallery", {
+      await axios.post("/api/gallery", {
         imageUrl: finalUrl,
         caption: caption || "New School Event",
       });
