@@ -35,9 +35,8 @@ const BlogFormModal = ({ blog, onClose, onSave }) => {
       return alert("Please fill Title, Excerpt, and Content.");
     setSaving(true);
     try {
-      if (blog?._id)
-        await axios.put(`http://localhost:5000/api/blogs/${blog._id}`, form);
-      else await axios.post("http://localhost:5000/api/blogs", form);
+      if (blog?._id) await axios.put(`/api/blogs/${blog._id}`, form);
+      else await axios.post("/api/blogs", form);
       onSave();
       onClose();
     } catch (err) {

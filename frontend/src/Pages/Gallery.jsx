@@ -12,7 +12,7 @@ const Gallery = () => {
   useEffect(() => {
     const fetchImages = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/api/gallery");
+        const res = await axios.get("/api/gallery");
         setImages(res.data);
       } catch (err) {
         console.error("Failed to load gallery:", err);
