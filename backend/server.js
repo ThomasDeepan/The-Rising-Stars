@@ -70,7 +70,7 @@ app.delete("/api/inquiries/:id", async (req, res) => {
 app.get("/api/gallery", async (req, res) => {
   try {
     const photos = await Gallery.find().sort({ date: -1 });
-    console.log("Found photos:", photos.length); // This will show in your terminal
+    // console.log("Found photos:", photos.length); // This will show in your terminal
     res.json(photos);
   } catch (err) {
     console.error("Error fetching gallery:", err);
