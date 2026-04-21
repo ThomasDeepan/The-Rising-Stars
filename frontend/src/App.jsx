@@ -12,8 +12,8 @@ import Blog from "./Pages/Blog";
 import Contact from "./Pages/Contact";
 import AdminDashboard from "./Components/AdminDashboard";
 import AdminLogin from "./Components/AdminLogin";
-import ScrollToTop from "./components/ScrollToTop";
-import FloatingSocials from "./components/FloatingSocials";
+import ScrollToTop from "./Components/ScrollToTop";
+import FloatingSocials from "./Components/FloatingSocials";
 
 function App() {
   return (
