@@ -183,7 +183,7 @@ const AdminDashboard = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#FFF9F0] mt-16 p-6 md:p-12 relative font-['Nunito']">
+    <div className="min-h-screen bg-[#FFF9F0] mt-16 p-6 md:p-12 relative">
       <div className="max-w-6xl mx-auto">
         <header className="flex flex-col md:flex-row justify-between items-start md:items-center mb-10 gap-4">
           <div>
@@ -250,7 +250,12 @@ const AdminDashboard = () => {
                     </span>
                   </div>
                   <div className="bg-[#FFF9F0] p-4 rounded-2xl text-[#113B45] text-sm border-l-4 border-[#F2A365]">
-                    "{iq.message}"
+                    <p className="font-bold mb-1 text-[#D97706]">
+                      Subject: {iq.subject}
+                    </p>
+                    <p className="italic">
+                      "{iq.message || "No message content provided."}"
+                    </p>
                   </div>
                 </div>
                 <button
