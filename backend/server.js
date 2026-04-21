@@ -2,6 +2,8 @@ const express = require("express");
 const mongoose = require("mongoose");
 const cors = require("cors");
 const Inquiry = require("./models/Inquiry");
+const Gallery = require("./models/Gallery");
+const Blog = require("./models/Blog");
 require("dotenv").config();
 
 const app = express();
@@ -61,6 +63,84 @@ app.delete("/api/inquiries/:id", async (req, res) => {
     res.status(200).json({ message: "Inquiry deleted successfully" });
   } catch (error) {
     res.status(500).json({ error: "Failed to delete inquiry" });
+  }
+});
+
+// Ensure this is ABOVE app.listen and BELOW your middleware (app.use(cors()))
+app.get("/api/gallery", async (req, res) => {
+  try {
+    const photos = await Gallery.find().sort({ date: -1 });
+    console.log("Found photos:", photos.length); // This will show in your terminal
+    res.json(photos);
+  } catch (err) {
+    console.error("Error fetching gallery:", err);
+    res.status(500).send("Server Error");
+  }
+});
+
+// Run this once by visiting http://localhost:5000/api/gallery/seed
+app.get("/api/gallery/seed", async (req, res) => {
+  const legacyImages = [];
+  // Loop to generate paths for images 1 to 43 based on your screenshots
+  for (let i = 1; i <= 52; i++) {
+    legacyImages.push({
+      imageUrl: `/images/gallery/${i}.jpg`,
+      caption: "Rising Stars Memory",
+      category: "General",
+    });
+  }
+  await Gallery.insertMany(legacyImages);
+  res.send("All 52 legacy images registered in MongoDB!");
+});
+
+// ─── BLOG ROUTES ─────────────────────────────────────────────────────────────
+app.get("/api/blogs", async (req, res) => {
+  try {
+    const blogs = await Blog.find().sort({ date: -1 });
+    res.status(200).json(blogs);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch blogs" });
+  }
+});
+
+app.get("/api/blogs/:id", async (req, res) => {
+  try {
+    const blog = await Blog.findById(req.params.id);
+    if (!blog) return res.status(404).json({ error: "Blog not found" });
+    res.status(200).json(blog);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to fetch blog" });
+  }
+});
+
+app.post("/api/blogs", async (req, res) => {
+  try {
+    const newBlog = new Blog(req.body);
+    await newBlog.save();
+    res.status(201).json(newBlog);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to create blog" });
+  }
+});
+
+app.put("/api/blogs/:id", async (req, res) => {
+  try {
+    const updated = await Blog.findByIdAndUpdate(req.params.id, req.body, {
+      new: true,
+    });
+    if (!updated) return res.status(404).json({ error: "Blog not found" });
+    res.status(200).json(updated);
+  } catch (error) {
+    res.status(500).json({ error: "Failed to update blog" });
+  }
+});
+
+app.delete("/api/blogs/:id", async (req, res) => {
+  try {
+    await Blog.findByIdAndDelete(req.params.id);
+    res.status(200).json({ message: "Blog deleted successfully" });
+  } catch (error) {
+    res.status(500).json({ error: "Failed to delete blog" });
   }
 });
 

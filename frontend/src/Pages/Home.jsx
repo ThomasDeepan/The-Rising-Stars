@@ -257,7 +257,7 @@ const Home = () => {
         </div>
       </section>
 
-      <section className="relative py-24 bg-[#FFF9F0] font-['Nunito'] overflow-hidden">
+      <section className="relative py-24 bg-[#FFF9F0] overflow-hidden">
         {/* BACKGROUND LAYER 1: The Watermark Pattern */}
         <div
           className="absolute inset-0 z-0 opacity-[0.03] pointer-events-none"

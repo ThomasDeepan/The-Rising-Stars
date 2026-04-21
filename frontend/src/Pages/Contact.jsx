@@ -1,18 +1,17 @@
-import React,{ useState } from "react";
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
 import { Mail, Phone, Clock, Send } from "lucide-react";
 import doodles from "../assets/doodle2.png";
 import contactIllustration from "../assets/240.jpeg"; // Replace with a friendly preschool-themed illustration
 
 const Contact = () => {
-
   // 1. STATE DEFINITION (Place this at the very top of the component)
-  const [formData, setFormData] = useState({ 
-    name: '', 
-    email: '', 
-    phone: '', 
-    subject: '', 
-    message: '' 
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    subject: "",
+    message: "",
   });
 
   // 2. THE CHANGE HANDLER (Updates state as the user types)
@@ -24,15 +23,19 @@ const Contact = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5000/api/contact', formData);
+      const res = await axios.post(
+        "http://localhost:5000/api/contact",
+        formData,
+      );
       alert("Success! The Rising Stars team will contact you soon.");
       // Clear form after success
-      setFormData({ name: '', email: '', phone: '', subject: '', message: '' });
+      setFormData({ name: "", email: "", phone: "", subject: "", message: "" });
     } catch (err) {
-      alert("Backend Connection Error. Check if your server is running on Port 5000!");
+      alert(
+        "Backend Connection Error. Check if your server is running on Port 5000!",
+      );
     }
   };
-
 
   return (
     <section className="relative py-24 bg-[#FFF9F0] overflow-hidden">
@@ -120,16 +123,16 @@ const Contact = () => {
           <form onSubmit={handleSubmit} className="space-y-6">
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <input
-                type="text" 
-                placeholder="Your Name" 
+                type="text"
+                placeholder="Your Name"
                 value={formData.name} // Binds state to input
                 onChange={handleChange} // Updates state
                 className="w-full px-6 py-4 rounded-2xl bg-[#FFF9F0] border-2 border-transparent focus:border-[#F2A365] outline-none transition-all font-medium"
                 name="name" // MUST match the key in formData
               />
               <input
-                type="email" 
-                placeholder="Your Email" 
+                type="email"
+                placeholder="Your Email"
                 value={formData.email}
                 onChange={handleChange}
                 className="w-full px-6 py-4 rounded-2xl bg-[#FFF9F0] border-2 border-transparent focus:border-[#F2A365] outline-none transition-all font-medium"
@@ -138,8 +141,8 @@ const Contact = () => {
             </div>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
               <input
-                type="text" 
-                placeholder="Phone Number" 
+                type="text"
+                placeholder="Phone Number"
                 name="phone"
                 value={formData.phone}
                 onChange={handleChange}
@@ -147,12 +150,12 @@ const Contact = () => {
                 className="w-full px-6 py-4 rounded-2xl bg-[#FFF9F0] border-2 border-transparent focus:border-[#3D737F] outline-none transition-all font-medium"
               />
               <input
-                type="text" 
+                type="text"
                 name="subject"
                 value={formData.subject}
                 onChange={handleChange}
                 required
-                placeholder="Subject" 
+                placeholder="Subject"
                 className="w-full px-6 py-4 rounded-2xl bg-[#FFF9F0] border-2 border-transparent focus:border-[#3D737F] outline-none transition-all font-medium"
               />
             </div>
@@ -161,7 +164,7 @@ const Contact = () => {
               value={formData.message}
               onChange={handleChange}
               className="w-full px-6 py-4 rounded-2xl bg-[#FFF9F0] border-2 border-transparent focus:border-[#E67E7E] outline-none transition-all font-medium resize-none"
-              placeholder="Your Message" 
+              placeholder="Your Message"
             ></textarea>
 
             <button className="w-full bg-[#113B45] text-white py-4 rounded-2xl font-black text-lg flex items-center justify-center gap-3 hover:bg-[#3D737F] transition-all shadow-lg shadow-slate-200 group">
