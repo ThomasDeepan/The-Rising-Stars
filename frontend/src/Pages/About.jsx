@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Target, Eye, Sun, Star, Heart } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 import logo from "../assets/logo.png";
@@ -6,6 +6,14 @@ import founder from "../assets/founder.jpeg";
 import cofounder from "../assets/cofounder.jpeg";
 
 const About = () => {
+  useEffect(() => {
+    // This force-clears any previous scroll position
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant",
+    });
+  }, []);
   const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-[#FFF9F0] overflow-hidden">

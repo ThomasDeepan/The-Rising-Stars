@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { CheckCircle, MapPin, Rocket, Users, BookOpen } from "lucide-react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Autoplay, Pagination, Navigation } from "swiper/modules";
@@ -21,6 +21,14 @@ import branch3_2 from "../assets/franchise/52.jpg";
 import branch3_3 from "../assets/franchise/53.jpg";
 
 const Franchise = () => {
+  useEffect(() => {
+    // This force-clears any previous scroll position
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: "instant",
+    });
+  }, []);
   const branches = [
     {
       name: "Main Franchise",

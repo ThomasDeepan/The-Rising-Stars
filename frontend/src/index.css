@@ -9,3 +9,12 @@
     color: #1f2937;
   }
 }
+
+html {
+  scroll-behavior: auto !important;
+}
+
+body {
+  overflow-x: hidden; /* Prevent horizontal scroll */
+  position: relative;
+}

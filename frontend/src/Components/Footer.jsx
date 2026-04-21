@@ -54,19 +54,24 @@ const Footer = () => {
               Quick Links
             </h4>
             <ul className="space-y-4 text-gray-300 font-medium">
-              {["Home", "About Us", "Gallery", "Franchise", "Contact Us"].map(
-                (link) => (
-                  <li key={link}>
-                    <Link
-                      to={`/${link.toLowerCase().replace(" ", "")}`}
-                      className="hover:text-white hover:translate-x-2 transition-all flex items-center gap-2 group"
-                    >
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#F2A365] opacity-0 group-hover:opacity-100 transition-opacity"></span>
-                      {link}
-                    </Link>
-                  </li>
-                ),
-              )}
+              {[
+                { name: "Home", path: "/" },
+                { name: "Blog", path: "/blog" },
+                { name: "About Us", path: "/about" },
+                { name: "Gallery", path: "/gallery" },
+                { name: "Franchise", path: "/franchise" },
+                { name: "Contact Us", path: "/contact" },
+              ].map((link) => (
+                <li key={link.name}>
+                  <Link
+                    to={link.path}
+                    className="hover:text-white hover:translate-x-2 transition-all flex items-center gap-2 group"
+                  >
+                    <span className="w-1.5 h-1.5 rounded-full bg-[#F2A365] opacity-0 group-hover:opacity-100 transition-opacity"></span>
+                    {link.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
