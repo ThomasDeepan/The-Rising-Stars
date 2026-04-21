@@ -23,7 +23,7 @@ mongoose
   .catch((err) => console.log(err));
 
 // 2. THE "POST" ROUTE (Receiving data)
-app.post("/api/contact", async (req, res) => {
+app.post("/api/inquiries", async (req, res) => {
   try {
     const newInquiry = new Inquiry(req.body); // Takes data from the form
     await newInquiry.save(); // Saves it to MongoDB
