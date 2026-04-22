@@ -84,25 +84,25 @@ const benefits = [
 
 const educationCards = [
   {
-    title: "Learning Physically",
-    desc: "Dive Into Early Education With Our Exploratory Playgroup Where Toddlers Aged 2.6 To 4 Years Engage In Fun, Sensory-Based Activities.",
+    title: "Play Group",
+    desc: "Dive Into Early Education With Our Exploratory Playgroup Where Toddlers Aged 2 To 2.6 Years Engage In Fun, Sensory-Based Activities.",
     image: physicalImg, // Replace with your yoga/physical image
     color: "#3D737F", // Teal
     shape: "rounded-full",
   },
   {
-    title: "Toys",
-    desc: "Prepare Your Child For Primary Education With Our Comprehensive Kindergarten, For Ages 1.8 To 2.6. This Program Enhances Cognitive Development.",
-    image: toysImg, // Replace with your toys image
-    color: "#F2A365", // Orange
-    shape: "rounded-3xl",
-  },
-  {
-    title: "Writing Games",
-    desc: "Our Foundational Nursery Program For Children Aged 1.8 To 4 Years Focuses On Laying The Groundwork For Lifelong Learning Through Interactive Storytelling.",
-    image: writingImg, // Replace with your writing image
+    title: "Nursery",
+    desc: "Our Foundational Nursery Program For Children Aged 2.6 To 4 Years Focuses On Laying The Groundwork For Lifelong Learning Through Interactive Storytelling.",
+    image: toysImg, // Replace with your writing image
     color: "#E67E7E", // Coral
     shape: "rounded-br-[80px]",
+  },
+  {
+    title: "Day Care",
+    desc: "Prepare Your Child For Primary Education With Our Comprehensive Kindergarten, For Ages above 1.8 Years. This Program Enhances Cognitive Development.",
+    image: writingImg, // Replace with your toys image
+    color: "#F2A365", // Orange
+    shape: "rounded-3xl",
   },
 ];
 

@@ -81,9 +81,9 @@ const Footer = () => {
               Our Programs
             </h4>
             <ul className="space-y-4 text-gray-300 font-medium text-sm">
-              <li>Toddler Program (1.5 - 2.5y)</li>
-              <li>Preschool (2.5 - 4y)</li>
-              <li>Kindergarten (4 - 6y)</li>
+              <li>Play Group (2 - 2.6y)</li>
+              <li>Nursery (2.6 - 4y)</li>
+              <li>Daycare (From 1.8 years)</li>
               <li>After School Activities</li>
             </ul>
           </div>
