@@ -163,22 +163,32 @@ const AdminDashboard = () => {
 
   const handleAddGallery = async () => {
     if (!imgUrl) return alert("Please paste an image URL");
+
     let finalUrl = imgUrl;
+
     if (imgUrl.includes("drive.google.com")) {
-      const fileId = imgUrl.split("/d/")[1]?.split("/")[0];
-      if (fileId) finalUrl = `https://lh3.googleusercontent.com/d/${fileId}`;
+      // This looks for the ID specifically
+      const parts = imgUrl.split("/d/");
+      if (parts.length > 1) {
+        const fileId = parts[1].split("/")[0]; // This gets '19DlvBc5zRWHxSJUYsKyHAvUSyTYcDrZU'
+
+        // CRITICAL: Notice the '$' before the '{'
+        finalUrl = `https://lh3.googleusercontent.com/u/0/d/YOUR_ID_HERE0...{fileId}`;
+      }
     }
+
+    // LOG THIS to your ThinkBook console (F12) to check it BEFORE sending to Atlas
+    console.log("Final URL checking:", finalUrl);
+
     try {
       await axios.post("/api/gallery", {
         imageUrl: finalUrl,
         caption: caption || "New School Event",
+        category: "Education",
       });
-      alert("Added to Gallery!");
-      setImgUrl("");
-      setCaption("");
-      setIsModalOpen(false);
+      alert("Added successfully!");
     } catch (err) {
-      alert("Upload failed");
+      console.error(err);
     }
   };
 
@@ -232,40 +242,48 @@ const AdminDashboard = () => {
         {/* --- INQUIRIES VIEW --- */}
         {activeTab === "inquiries" && (
           <div className="grid gap-6 mb-20">
-            {inquiries.map((iq) => (
-              <div
-                key={iq._id}
-                className="bg-white rounded-[2rem] p-8 shadow-md border border-white flex flex-col md:flex-row justify-between items-center gap-6"
-              >
-                <div className="space-y-3 flex-grow">
-                  <h3 className="text-xl font-black text-[#113B45] flex items-center gap-2">
-                    <User size={18} className="text-[#F2A365]" /> {iq.name}
-                  </h3>
-                  <div className="flex gap-4 text-sm font-bold text-[#3D737F]">
-                    <span className="flex items-center gap-1">
-                      <Mail size={14} /> {iq.email}
-                    </span>
-                    <span className="flex items-center gap-1">
-                      <Phone size={14} /> {iq.phone}
-                    </span>
-                  </div>
-                  <div className="bg-[#FFF9F0] p-4 rounded-2xl text-[#113B45] text-sm border-l-4 border-[#F2A365]">
-                    <p className="font-bold mb-1 text-[#D97706]">
-                      Subject: {iq.subject}
-                    </p>
-                    <p className="italic">
-                      "{iq.message || "No message content provided."}"
-                    </p>
-                  </div>
-                </div>
-                <button
-                  onClick={() => deleteInquiry(iq._id)}
-                  className="p-4 bg-red-50 text-red-500 rounded-2xl hover:bg-red-500 hover:text-white transition-all"
+            {Array.isArray(inquiries) && inquiries.length > 0 ? (
+              inquiries.map((iq) => (
+                <div
+                  key={iq._id}
+                  className="bg-white rounded-[2rem] p-8 shadow-md border border-white flex flex-col md:flex-row justify-between items-center gap-6"
                 >
-                  <Trash2 size={20} />
-                </button>
+                  <div className="space-y-3 flex-grow">
+                    <h3 className="text-xl font-black text-[#113B45] flex items-center gap-2">
+                      <User size={18} className="text-[#F2A365]" /> {iq.name}
+                    </h3>
+                    <div className="flex flex-wrap gap-4 text-sm font-bold text-[#3D737F]">
+                      <span className="flex items-center gap-1">
+                        <Mail size={14} /> {iq.email}
+                      </span>
+                      <span className="flex items-center gap-1">
+                        <Phone size={14} /> {iq.phone}
+                      </span>
+                    </div>
+                    <div className="bg-[#FFF9F0] p-4 rounded-2xl text-[#113B45] text-sm border-l-4 border-[#F2A365]">
+                      <p className="font-bold mb-1 text-[#D97706]">
+                        Subject: {iq.subject}
+                      </p>
+                      <p className="italic">
+                        "{iq.message || "No message content provided."}"
+                      </p>
+                    </div>
+                  </div>
+                  <button
+                    onClick={() => deleteInquiry(iq._id)}
+                    className="p-4 bg-red-50 text-red-500 rounded-2xl hover:bg-red-500 hover:text-white transition-all shrink-0"
+                  >
+                    <Trash2 size={20} />
+                  </button>
+                </div>
+              ))
+            ) : (
+              <div className="text-center py-20 bg-white rounded-[3rem] border-2 border-dashed border-orange-100">
+                <p className="text-[#3D737F] font-bold text-lg">
+                  No inquiries found yet.
+                </p>
               </div>
-            ))}
+            )}
           </div>
         )}
 

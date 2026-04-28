@@ -13,9 +13,20 @@ const Gallery = () => {
     const fetchImages = async () => {
       try {
         const res = await axios.get("/api/gallery");
-        setImages(res.data);
+        console.log("RAW API RESPONSE:", res.data); // <--- Add this!
+
+        // If the data is wrapped in an object like { photos: [] }
+        // you need to access that specific property
+        if (Array.isArray(res.data)) {
+          setImages(res.data);
+        } else if (res.data && Array.isArray(res.data.photos)) {
+          setImages(res.data.photos);
+        } else {
+          setImages([]); // Force to empty array if data is weird
+        }
       } catch (err) {
         console.error("Failed to load gallery:", err);
+        setImages([]);
       } finally {
         setLoading(false);
       }
@@ -54,7 +65,7 @@ const Gallery = () => {
       ) : (
         /* MASONRY GRID LAYOUT */
         <div className="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6 max-w-7xl mx-auto">
-          {images.map((img) => (
+          {images?.map((img) => (
             <div
               key={img._id}
               className="relative break-inside-avoid group cursor-pointer rounded-[2rem] overflow-hidden border-4 border-white shadow-lg hover:shadow-2xl transition-all duration-300"

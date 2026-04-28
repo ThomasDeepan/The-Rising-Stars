@@ -42,7 +42,7 @@ const Blog = () => {
     categoryColors[cat] || "bg-gray-100 text-gray-700";
 
   return (
-    <div className="min-h-screen bg-[#FFF9F0] font-['Nunito']">
+    <div className="min-h-screen bg-[#FFF9F0]">
       {/* HERO */}
       <div className="relative overflow-hidden bg-[#113B45] pt-32 pb-20 px-6">
         <div className="absolute top-0 right-0 w-96 h-96 bg-[#F2A365]/10 rounded-full translate-x-32 -translate-y-32" />

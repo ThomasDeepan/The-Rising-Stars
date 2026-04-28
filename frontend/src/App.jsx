@@ -14,12 +14,14 @@ import AdminDashboard from "./Components/AdminDashboard";
 import AdminLogin from "./Components/AdminLogin";
 import ScrollToTop from "./Components/ScrollToTop";
 import FloatingSocials from "./Components/FloatingSocials";
+import AdmissionPopup from "./Components/AdmissionPopup";
 
 function App() {
   return (
     <>
       <Router>
         <ScrollToTop />
+        {/* <AdmissionPopup /> */}
         <Navbar />
         <Routes>
           <Route path="/" element={<Home />} />

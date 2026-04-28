@@ -35,6 +35,8 @@ import img7 from "../assets/gallery/41.jpg";
 import img8 from "../assets/gallery/42.jpg";
 
 import Hero from "../Components/Hero";
+import AdmissionPopup from "../Components/AdmissionPopup";
+
 import { Lightbulb, Heart, Users, ShieldCheck } from "lucide-react";
 import {
   Eye,
@@ -189,6 +191,7 @@ const Home = () => {
   return (
     // SECTION: Full-width container to hold background shapes if needed
     <div className="w-full bg-white relative overflow-hidden ">
+      <AdmissionPopup />
       <Hero />
       {/* --- PROGRAMS SECTION (Placed inside the Home/Hero wrapper) --- */}
       <section className="py-24 bg-[#FFF9F0] overflow-hidden">

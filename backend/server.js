@@ -69,28 +69,60 @@ app.delete("/api/inquiries/:id", async (req, res) => {
 // Ensure this is ABOVE app.listen and BELOW your middleware (app.use(cors()))
 app.get("/api/gallery", async (req, res) => {
   try {
+    // Change 'createdAt' to 'date' to match your Gallery Schema
     const photos = await Gallery.find().sort({ date: -1 });
-    // console.log("Found photos:", photos.length); // This will show in your terminal
     res.json(photos);
   } catch (err) {
-    console.error("Error fetching gallery:", err);
-    res.status(500).send("Server Error");
+    console.error("Fetch error:", err);
+    res.status(500).json([]);
+  }
+});
+// Run this once by visiting http://localhost:5000/api/gallery/seed
+app.get("/api/gallery/seed", async (req, res) => {
+  try {
+    // 1. Safety wipe (it's already 0, but good practice)
+    await Gallery.deleteMany({});
+
+    const totalImages = 82;
+    const cleanData = [];
+
+    for (let i = 1; i <= totalImages; i++) {
+      cleanData.push({
+        imageUrl: `/images/gallery/${i}.jpg`,
+        caption: "Rising Stars Memory",
+        category: "General",
+        // We use i * 1000 to ensure image 82 has the "newest" time
+        createdAt: new Date(Date.now() + i * 1000),
+      });
+    }
+
+    await Gallery.insertMany(cleanData);
+    res.send(
+      "<h1>Success!</h1><p>Database now has exactly 82 unique images.</p>",
+    );
+  } catch (err) {
+    res.status(500).send("Error: " + err.message);
   }
 });
 
-// Run this once by visiting http://localhost:5000/api/gallery/seed
-app.get("/api/gallery/seed", async (req, res) => {
-  const legacyImages = [];
-  // Loop to generate paths for images 1 to 43 based on your screenshots
-  for (let i = 1; i <= 52; i++) {
-    legacyImages.push({
-      imageUrl: `/images/gallery/${i}.jpg`,
-      caption: "Rising Stars Memory",
-      category: "General",
+// POST a new image to the gallery
+app.post("/api/gallery", async (req, res) => {
+  try {
+    const { imageUrl, caption, category } = req.body;
+
+    // Use your Gallery model to create a new entry
+    const newImage = new Gallery({
+      imageUrl,
+      caption,
+      category: category || "General",
     });
+
+    const savedImage = await newImage.save();
+    res.status(201).json(savedImage);
+  } catch (error) {
+    console.error("Gallery Save Error:", error);
+    res.status(500).json({ error: "Failed to add image to gallery" });
   }
-  await Gallery.insertMany(legacyImages);
-  res.send("All 52 legacy images registered in MongoDB!");
 });
 
 // ─── BLOG ROUTES ─────────────────────────────────────────────────────────────

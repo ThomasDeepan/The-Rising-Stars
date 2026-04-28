@@ -81,8 +81,8 @@ const Footer = () => {
               Our Programs
             </h4>
             <ul className="space-y-4 text-gray-300 font-medium text-sm">
-              <li>Play Group (2 - 2.6y)</li>
-              <li>Nursery (2.6 - 4y)</li>
+              <li>Play Group (2 - 2.6 years)</li>
+              <li>Nursery (2.6 - 4 years)</li>
               <li>Daycare (From 1.8 years)</li>
               <li>After School Activities</li>
             </ul>
@@ -91,13 +91,23 @@ const Footer = () => {
           {/* COLUMN 4: CONTACT INFO */}
           <div>
             <h4 className="text-[#F2A365] font-black mb-6 uppercase tracking-widest text-sm">
-              Contact Info
+              Rising Stars Kids School.
             </h4>
             <ul className="space-y-5">
               <li className="flex gap-4 items-start text-gray-300">
                 <MapPin className="text-[#F2A365] shrink-0" size={20} />
                 <span className="text-sm">
-                  Rising Stars Kids School, Villupuram, Tamil Nadu.
+                  <span className="font-bold">Main Branch</span> : No 16. Rahim
+                  Layout, K.K Road, Villupuram.
+                  <br />
+                  <br /> <span className="font-bold">Branch 1</span> : No 472,
+                  Dhevanathaswamy Nagar, East Pondy Road, Villupuram. <br />
+                  <br />
+                  <span className="font-bold">Branch 2</span>: V.A.O Nagar, 1st
+                  cross street, Collectorate Back Side, Villupuram. <br />
+                  <br />
+                  <span className="font-bold">Branch 3</span>: No 89,
+                  Subramaniyar Kovil Street, Kumarakuppam, Valavanur.
                 </span>
               </li>
               <li className="flex gap-4 items-center text-gray-300">
