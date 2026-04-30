@@ -9,7 +9,7 @@ require("dotenv").config();
 const app = express();
 app.use(
   cors({
-    origin: "https://therisingstars.in/", // Tell the server to only trust your React app
+    origin: ["https://therisingstars.in", "https://therisingstars.in/"], // Tell the server to only trust your React app
   }),
 );
 app.use(express.json()); // Allows server to read JSON data
