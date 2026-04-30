@@ -191,7 +191,6 @@ const Home = () => {
   return (
     // SECTION: Full-width container to hold background shapes if needed
     <div className="w-full bg-white relative overflow-hidden ">
-      <AdmissionPopup />
       <Hero />
       {/* --- PROGRAMS SECTION (Placed inside the Home/Hero wrapper) --- */}
       <section className="py-24 bg-[#FFF9F0] overflow-hidden">
