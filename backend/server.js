@@ -87,7 +87,7 @@ app.get("/api/gallery/seed", async (req, res) => {
     // 1. Safety wipe (it's already 0, but good practice)
     await Gallery.deleteMany({});
 
-    const totalImages = 78;
+    const totalImages = 71;
     const cleanData = [];
 
     for (let i = 1; i <= totalImages; i++) {
@@ -95,14 +95,14 @@ app.get("/api/gallery/seed", async (req, res) => {
         imageUrl: `/images/gallery/${i}.jpg`,
         caption: "Rising Stars Memory",
         category: "General",
-        // We use i * 1000 to ensure image 82 has the "newest" time
+        // We use i * 1000 to ensure image 71 has the "newest" time
         createdAt: new Date(Date.now() + i * 1000),
       });
     }
 
     await Gallery.insertMany(cleanData);
     res.send(
-      "<h1>Success!</h1><p>Database now has exactly 78 unique images.</p>",
+      "<h1>Success!</h1><p>Database now has exactly 71 unique images.</p>",
     );
   } catch (err) {
     res.status(500).send("Error: " + err.message);
