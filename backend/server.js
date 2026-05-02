@@ -87,7 +87,7 @@ app.get("/api/gallery/seed", async (req, res) => {
     // 1. Safety wipe (it's already 0, but good practice)
     await Gallery.deleteMany({});
 
-    const totalImages = 71;
+    const totalImages = 109;
     const cleanData = [];
 
     for (let i = 1; i <= totalImages; i++) {
@@ -102,7 +102,7 @@ app.get("/api/gallery/seed", async (req, res) => {
 
     await Gallery.insertMany(cleanData);
     res.send(
-      "<h1>Success!</h1><p>Database now has exactly 71 unique images.</p>",
+      "<h1>Success!</h1><p>Database now has exactly 109 unique images.</p>",
     );
   } catch (err) {
     res.status(500).send("Error: " + err.message);
